@@ -1,5 +1,5 @@
 /* =========================
-   ProtocolBuddy - app.js
+   GuardSafe / ProtocolBuddy - app.js
    Offline-first MVP (Objectbeveiliging)
    ========================= */
 
@@ -81,7 +81,7 @@ const chatForm = $("#chatForm");
 const chatInput = $("#chatInput");
 const quickBtns = $$(".quick-replies .chip");
 
-/* ---------- Settings refs (NEW) ---------- */
+/* ---------- Settings refs (optional) ---------- */
 const btnSettings = $("#btnSettings");
 const settingsModal = $("#settingsModal");
 const btnCloseSettings = $("#btnCloseSettings");
@@ -103,51 +103,15 @@ let checklistState = loadLS(STORAGE.checklist, {
 });
 
 /* =========================
-   Sample fallback protocols (only if protocols.json fails)
+   Fallback protocols (only if protocols.json fails)
    ========================= */
 function fallbackProtocols() {
   const data = [
     {
-      id: "start-dienst",
-      title: "Start dienst / overdracht",
-      category: "Dienst",
-      keywords: ["start", "overdracht", "dienst", "briefing", "logboek"],
-      situation: "Je begint je dienst of neemt de post over.",
-      goal: "Scherpe start: weten wat speelt en middelen werken.",
-      steps: [
-        "Neem overdracht: bijzonderheden, incidenten, open punten.",
-        "Check middelen: porto, telefoon, zaklamp, sleutels/passen.",
-        "Check panelen: brand/inbraak/technisch volgens instructie.",
-        "Korte controle: deuren dicht, nooduitgangen vrij.",
-        "Noteer starttijd + status in logboek."
-      ],
-      say: ["“Welke open punten moet ik opvolgen?”", "“Zijn er storingen of zones met extra aandacht?”"],
-      escalate: "Bij storing of ontbrekende middelen: meld direct bij leiding/meldkamer.",
-      dont: ["Niet starten zonder communicatie.", "Geen aannames bij onduidelijkheid."]
-    },
-    {
-      id: "ronde-lopen",
-      title: "Ronde lopen / controlepunten",
-      category: "Rondes",
-      keywords: ["ronde", "controle", "deur", "ramen", "sloten", "rook", "geluid"],
-      situation: "Je loopt een ronde door het object.",
-      goal: "Afwijkingen vroeg zien en risico’s beperken.",
-      steps: [
-        "Volg route of scanpunten volgens opdracht.",
-        "Let op: open deuren/ramen, schade, rook/geur, verdachte geluiden.",
-        "Check nooduitgangen: vrij, niet geblokkeerd.",
-        "Noteer afwijking: tijd, locatie, wat je ziet/hoort/ruikt.",
-        "Acuut risico? Afstand en escaleer."
-      ],
-      say: ["“Ik loop ronde en meld afwijkingen direct.”"],
-      escalate: "Bij rook/inbraaksporen/agressie: meld direct en volg noodprotocol.",
-      dont: ["Niet alleen een verdachte ruimte in als dat niet mag."]
-    },
-    {
       id: "alarmmelding",
-      title: "Alarmmelding (inbraak/brandpaneel)",
+      title: "Alarmmelding (inbraak/technisch/brandpaneel)",
       category: "Nood",
-      keywords: ["alarm", "paneel", "inbraak", "brand", "melding", "sirene"],
+      keywords: ["alarm", "paneel", "melding", "sirene", "zone", "inbraak", "brand"],
       situation: "Er gaat een alarm af of paneel geeft melding.",
       goal: "Juiste opvolging en veilige controle starten.",
       steps: [
@@ -160,6 +124,42 @@ function fallbackProtocols() {
       say: ["“Melding zone X. Ik volg procedure en meld terug.”"],
       escalate: "Rook/brand/indringer: direct opschalen volgens noodprocedure.",
       dont: ["Niet resetten zonder check/goedkeuring."]
+    },
+    {
+      id: "brand-rook",
+      title: "Brand / rookontwikkeling",
+      category: "Nood",
+      keywords: ["brand", "rook", "brandlucht", "vlam", "ontruiming", "112"],
+      situation: "Je ziet rook, ruikt brandlucht of ziet vuur.",
+      goal: "Mensen veilig, snelle alarmering, rook/brand beperken waar veilig.",
+      steps: [
+        "Beoordeel veiligheid: blijf uit rook, neem afstand, houd uitweg vrij.",
+        "Bel 112 (of laat bellen) + meld bij leiding/meldkamer.",
+        "Start ontruiming volgens instructie (rustig, duidelijke route).",
+        "Sluit deuren waar veilig mogelijk (rook beperken).",
+        "Wacht hulpdiensten op en geef info: locatie, toegang, gevaren."
+      ],
+      say: ["“We gaan nu naar buiten via deze nooduitgang.”"],
+      escalate: "Altijd opschalen: 112 + meldkamer/leiding + ontruimingsprocedure.",
+      dont: ["Niet terug naar binnen.", "Niet blussen als je niet getraind bent of het onveilig is."]
+    },
+    {
+      id: "agressie",
+      title: "Agressie (verbaal → fysiek)",
+      category: "Incident",
+      keywords: ["agressie", "schreeuwen", "dreigen", "geweld", "ruzie", "boos", "wapen"],
+      situation: "Iemand wordt agressief of dreigt met geweld.",
+      goal: "De-escaleren en veiligheid waarborgen.",
+      steps: [
+        "Houd afstand en zorg voor uitweg (jij en anderen).",
+        "Praat rustig: korte zinnen, grenzen stellen, geen discussie.",
+        "Vraag backup via porto/meldkamer bij oplopende spanning.",
+        "Beëindig contact als het onveilig wordt; ga naar veilige plek.",
+        "Bij direct geweld of wapen: 112 volgens instructie."
+      ],
+      say: ["“Ik wil u helpen, maar niet als u schreeuwt.”"],
+      escalate: "Oplopend risico: collega/leiding. Wapen/geweld: 112 + meldkamer.",
+      dont: ["Niet provoceren.", "Niet alleen blijven als het onveilig voelt."]
     }
   ];
 
@@ -207,7 +207,9 @@ function getCategories(protocols) {
   protocols.forEach(p => cats.add(p.category || "Overig"));
   return Array.from(cats);
 }
+
 function renderCategoryChips() {
+  if (!categoryChips) return;
   const cats = getCategories(PROTOCOLS);
   categoryChips.innerHTML = "";
 
@@ -246,6 +248,8 @@ function matchesQuery(p, q) {
 }
 
 function renderProtocols(listOverride = null) {
+  if (!protocolList || !protocolCount) return;
+
   const q = FILTER.query.trim().toLowerCase();
   const cat = FILTER.category;
 
@@ -312,6 +316,12 @@ function protocolToHtml(p) {
         Disclaimer: algemene richtlijnen. Volg altijd instructies van je werkgever/opdracht en de wet.
       </p>
 
+      <!-- ✅ Beginner-proof: altijd zichtbare beslis-hulp -->
+      <div class="callout info" role="note" aria-label="Beslis-hulp">
+        <p class="callout-title">Beslis-hulp</p>
+        <p class="callout-text"><strong>Twijfel = melden.</strong> Liever te vroeg melden dan te laat. Als je dit protocol volgt, handel je professioneel.</p>
+      </div>
+
       ${p.situation ? `
         <p class="small muted" style="margin:0 0 6px;">Situatie</p>
         <p style="margin:0 0 12px;"><strong>${escapeHtml(p.situation)}</strong></p>
@@ -344,22 +354,22 @@ function protocolToHtml(p) {
 }
 
 function updateFavoriteButton() {
-  if (!CURRENT_PROTOCOL_ID) return;
+  if (!CURRENT_PROTOCOL_ID || !btnToggleFavorite) return;
   const isFav = favorites.has(CURRENT_PROTOCOL_ID);
   btnToggleFavorite.textContent = isFav ? "⭐ In favorieten" : "☆ Voeg toe";
 }
 
 function openProtocol(id) {
   const p = findProtocolById(id);
-  if (!p) return;
+  if (!p || !modal) return;
 
   CURRENT_PROTOCOL_ID = id;
 
   mostUsed[id] = (mostUsed[id] || 0) + 1;
   saveLS(STORAGE.mostUsed, mostUsed);
 
-  modalTitle.textContent = p.title;
-  modalContent.innerHTML = protocolToHtml(p);
+  if (modalTitle) modalTitle.textContent = p.title;
+  if (modalContent) modalContent.innerHTML = protocolToHtml(p);
 
   updateFavoriteButton();
 
@@ -372,24 +382,24 @@ function openProtocol(id) {
 
 function closeModal() {
   CURRENT_PROTOCOL_ID = null;
+  if (!modal) return;
   if (typeof modal.close === "function") modal.close();
   else modal.removeAttribute("open");
 }
 
 function initModal() {
-  btnCloseModal.addEventListener("click", closeModal);
+  btnCloseModal?.addEventListener("click", closeModal);
 
-  // ✅ correct for dialog: click backdrop closes
-  modal.addEventListener("click", (e) => {
+  modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
 
-  btnToggleFavorite.addEventListener("click", () => {
+  btnToggleFavorite?.addEventListener("click", () => {
     if (!CURRENT_PROTOCOL_ID) return;
     toggleFavorite(CURRENT_PROTOCOL_ID);
   });
 
-  btnOpenInProtocols.addEventListener("click", () => {
+  btnOpenInProtocols?.addEventListener("click", () => {
     closeModal();
     setActiveView("protocols");
   });
@@ -413,6 +423,8 @@ function toggleFavorite(id) {
 }
 
 function renderFavorites() {
+  if (!favoritesList || !favoritesEmpty) return;
+
   const favArr = Array.from(favorites)
     .map(id => findProtocolById(id))
     .filter(Boolean);
@@ -445,13 +457,13 @@ function renderFavorites() {
    Search + filters
    ========================= */
 function initSearch() {
-  protocolSearch.addEventListener("input", (e) => {
+  protocolSearch?.addEventListener("input", (e) => {
     FILTER.query = e.target.value || "";
     renderProtocols();
   });
 
-  btnClearSearch.addEventListener("click", () => {
-    protocolSearch.value = "";
+  btnClearSearch?.addEventListener("click", () => {
+    if (protocolSearch) protocolSearch.value = "";
     FILTER.query = "";
     FILTER.category = "Alle";
     renderCategoryChips();
@@ -459,7 +471,7 @@ function initSearch() {
     toast("Zoekfilter gewist");
   });
 
-  btnOpenMostUsed.addEventListener("click", () => {
+  btnOpenMostUsed?.addEventListener("click", () => {
     const sorted = [...PROTOCOLS].sort((a, b) => (mostUsed[b.id] || 0) - (mostUsed[a.id] || 0));
     const top = sorted.slice(0, 6).filter(p => (mostUsed[p.id] || 0) > 0);
 
@@ -541,6 +553,7 @@ function renderChecklist() {
   const items = CHECKLISTS[tab] || [];
   const checkedMap = checklistState.checked[tab] || {};
 
+  if (!checklistPanel) return;
   checklistPanel.innerHTML = "";
 
   items.forEach(item => {
@@ -576,7 +589,7 @@ function initChecklists() {
     btn.addEventListener("click", () => setChecklistTab(btn.dataset.checktab));
   });
 
-  btnChecklistReset.addEventListener("click", () => {
+  btnChecklistReset?.addEventListener("click", () => {
     const tab = checklistState.activeTab;
     checklistState.checked[tab] = {};
     saveLS(STORAGE.checklist, checklistState);
@@ -584,7 +597,7 @@ function initChecklists() {
     toast("Checklist gereset");
   });
 
-  btnChecklistSave.addEventListener("click", () => {
+  btnChecklistSave?.addEventListener("click", () => {
     saveLS(STORAGE.checklist, checklistState);
     toast("Checklist opgeslagen");
   });
@@ -593,63 +606,11 @@ function initChecklists() {
 }
 
 /* =========================
-   Chatbot (offline assistant)
+   Chat v2 (local, beginner-proof)
    ========================= */
-function tokenize(text) {
-  return String(text || "")
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, " ")
-    .split(/\s+/)
-    .filter(Boolean);
-}
-
-function scoreProtocol(p, tokens) {
-  const keys = new Set([...(p.keywords || []).map(k => k.toLowerCase())]);
-  const hay = [
-    p.title,
-    p.category,
-    p.situation,
-    p.goal,
-    ...(p.keywords || [])
-  ].join(" ").toLowerCase();
-
-  let score = 0;
-
-  tokens.forEach(t => {
-    if (keys.has(t)) score += 4;
-    if (hay.includes(t)) score += 1;
-
-    // small synonym boosts
-    if (t === "rook" && hay.includes("brand")) score += 2;
-    if (t === "brand" && hay.includes("rook")) score += 2;
-    if (t === "ehbo" && hay.includes("medisch")) score += 2;
-    if (t === "sirene" && hay.includes("alarm")) score += 2;
-    if (t === "indringer" && (hay.includes("inbraak") || hay.includes("verdacht"))) score += 2;
-  });
-
-  return score;
-}
-
-function bestMatchProtocol(userText) {
-  const tokens = tokenize(userText);
-  if (tokens.length === 0) return null;
-
-  let best = null;
-  let bestScore = 0;
-
-  for (const p of PROTOCOLS) {
-    const s = scoreProtocol(p, tokens);
-    if (s > bestScore) {
-      bestScore = s;
-      best = p;
-    }
-  }
-
-  if (bestScore < 2) return null;
-  return best;
-}
-
 function addChatMessage(role, html) {
+  if (!chatThread) return;
+
   const wrap = document.createElement("div");
   wrap.className = `chat-msg ${role}`;
 
@@ -664,35 +625,138 @@ function addChatMessage(role, html) {
   return wrap;
 }
 
-function botReply(userText) {
-  const p = bestMatchProtocol(userText);
+function normalizeText(text) {
+  return String(text || "").toLowerCase().trim();
+}
 
-  if (!p) {
-    addChatMessage(
-      "bot",
-      `Ik snap je situatie nog niet zeker. Probeer 2–4 woorden zoals <strong>“alarm”, “rook”, “agressie”, “toegang”, “verdacht”</strong>.`
-    );
-    return;
+function findBestProtocol(userText, protocols) {
+  const text = normalizeText(userText);
+  let best = null;
+  let bestScore = 0;
+
+  for (const p of protocols) {
+    let score = 0;
+
+    if (p.keywords && Array.isArray(p.keywords)) {
+      for (const kw of p.keywords) {
+        const k = normalizeText(kw);
+        if (!k) continue;
+        if (text.includes(k)) score += 2;
+      }
+    }
+
+    if (p.title && text.includes(normalizeText(p.title))) score += 3;
+
+    // extra boost voor categorie woorden
+    if (p.category && text.includes(normalizeText(p.category))) score += 1;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = p;
+    }
   }
 
-  const firstSteps = (p.steps || []).slice(0, 3);
-  const stepsHtml = firstSteps.map(s => `<li>${escapeHtml(s)}</li>`).join("");
+  return bestScore >= 2 ? best : null;
+}
 
-  const node = addChatMessage(
-    "bot",
-    `
-      <strong>Dit past waarschijnlijk:</strong> ${escapeHtml(p.title)}<br/>
-      <span class="muted small">Stap 1–3</span>
-      <ol class="steps" style="margin:10px 0 8px;">${stepsHtml}</ol>
-      <button class="btn primary" type="button" data-chat-open="${escapeHtml(p.id)}">Open volledig protocol</button>
-    `
-  );
+function getCallAdvice(protocol) {
+  if (!protocol || !protocol.category) {
+    return `📞 <strong>Meld bij je leiding of meldkamer</strong> volgens afspraak.`;
+  }
+  if (String(protocol.category).toLowerCase() === "nood") {
+    return `📞 <strong>Bij direct gevaar: bel 112.</strong> Meld daarna bij je meldkamer/leiding.`;
+  }
+  return `📞 <strong>Meld bij je meldkamer of leidinggevende</strong> volgens afspraak.`;
+}
 
-  const btn = node.querySelector("[data-chat-open]");
-  if (btn) btn.addEventListener("click", () => openProtocol(btn.getAttribute("data-chat-open")));
+function detectUnsafeIntent(text) {
+  const t = normalizeText(text);
+  const unsafePhrases = [
+    "ik ga even kijken",
+    "ik ga alleen kijken",
+    "ik ga erachteraan",
+    "ik ga hem pakken",
+    "ik ga naar binnen",
+    "ik ga zelf checken"
+  ];
+  return unsafePhrases.some(p => t.includes(p));
+}
+
+function isWorkRelated(text) {
+  const t = normalizeText(text);
+  const workHints = [
+    "alarm", "paneel", "rook", "brand", "inbraak", "verdacht", "deur", "raam",
+    "toegang", "bezoeker", "leverancier", "pas", "badge", "sleutel",
+    "agressie", "schreeuw", "dreig", "ruzie", "wapen",
+    "medisch", "ehbo", "aed", "bewusteloos",
+    "ontruim", "nooduitgang",
+    "stroom", "lift", "lekkage", "gas"
+  ];
+  return workHints.some(w => t.includes(w));
+}
+
+function renderLines(text) {
+  // safe-ish: we only inject <br> and <strong> ourselves in generator output
+  return escapeHtml(text).replaceAll("\n", "<br>");
+}
+
+function generateChatResponse(userText) {
+  const raw = String(userText || "").trim();
+
+  if (!raw) {
+    return { html: "Typ wat er gebeurt op het object, dan help ik direct.", protocol: null };
+  }
+
+  if (!isWorkRelated(raw)) {
+    return {
+      html:
+        "Ik help alleen met <strong>werk-gerelateerde beveiligingssituaties</strong>.<br><br>" +
+        "Beschrijf wat er gebeurt op het object (bijv. <em>alarm</em>, <em>rook</em>, <em>agressie</em>, <em>toegang</em>, <em>storing</em>).",
+      protocol: null
+    };
+  }
+
+  const unsafe = detectUnsafeIntent(raw);
+  const protocol = findBestProtocol(raw, PROTOCOLS);
+
+  if (!protocol) {
+    const warn = unsafe
+      ? "<br><br>⚠️ <strong>Stop even:</strong> ga niet alleen ‘even kijken’. Eerst melden/backup."
+      : "";
+    return {
+      html:
+        "Ik weet het nog niet zeker welk protocol het beste past.<br><br>" +
+        "👉 <strong>1 vraag:</strong> is er <strong>direct gevaar</strong>, <strong>agressie</strong>, of gaat het om <strong>toegang/techniek</strong>?" +
+        warn,
+      protocol: null
+    };
+  }
+
+  const steps = (protocol.steps || []).slice(0, 3);
+  const stepsHtml = steps.length
+    ? steps.map((s, i) => `${i + 1}️⃣ ${escapeHtml(s)}`).join("<br>")
+    : "1️⃣ Meld bij leiding/meldkamer en volg instructie.<br>2️⃣ Blijf veilig.<br>3️⃣ Leg vast in logboek.";
+
+  const warning = unsafe
+    ? "<br><br>⚠️ <strong>Let op:</strong> ga niet alleen ‘even kijken’. Eerst melden/backup, veiligheid eerst."
+    : "";
+
+  const callAdvice = getCallAdvice(protocol);
+
+  return {
+    html:
+      `⚠️ Dit lijkt op <strong>${escapeHtml(protocol.title)}</strong><br><br>` +
+      `<strong>Doe nu:</strong><br>${stepsHtml}<br><br>` +
+      `${callAdvice}` +
+      warning +
+      `<br><br><button class="btn primary" type="button" data-chat-open="${escapeHtml(protocol.id)}">Open volledig protocol</button>`,
+    protocol
+  };
 }
 
 function initChat() {
+  if (!chatForm || !chatInput || !chatThread) return;
+
   chatForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = (chatInput.value || "").trim();
@@ -700,20 +764,39 @@ function initChat() {
 
     addChatMessage("user", escapeHtml(text));
     chatInput.value = "";
-    botReply(text);
+
+    const resp = generateChatResponse(text);
+    const node = addChatMessage("bot", resp.html);
+
+    const btn = node?.querySelector("[data-chat-open]");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-chat-open");
+        openProtocol(id);
+      });
+    }
   });
 
   quickBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const q = btn.dataset.quick || btn.textContent;
       addChatMessage("user", escapeHtml(q));
-      botReply(q);
+      const resp = generateChatResponse(q);
+      const node = addChatMessage("bot", resp.html);
+
+      const b = node?.querySelector("[data-chat-open]");
+      if (b) {
+        b.addEventListener("click", () => {
+          const id = b.getAttribute("data-chat-open");
+          openProtocol(id);
+        });
+      }
     });
   });
 }
 
 /* =========================
-   Settings (NEW)
+   Settings (optional)
    ========================= */
 function openSettings() {
   if (!settingsModal) return;
@@ -727,7 +810,6 @@ function closeSettings() {
 }
 
 function initSettings() {
-  // If button doesn't exist in HTML, we just don't init settings
   if (!btnSettings || !settingsModal) return;
 
   btnSettings.addEventListener("click", openSettings);
@@ -778,12 +860,11 @@ async function init() {
   initSearch();
   initEmergencyButtons();
   initChecklists();
-  initChat();
   initModal();
-  initSettings(); // ✅ NEW
+  initSettings();
 
+  // ✅ Load protocols BEFORE chat, so chat can match immediately
   PROTOCOLS = await loadProtocols();
-
   PROTOCOLS = PROTOCOLS.map(p => ({
     ...p,
     id: p.id || slugify(p.title || "protocol")
@@ -792,6 +873,8 @@ async function init() {
   renderCategoryChips();
   renderProtocols();
   renderFavorites();
+
+  initChat(); // ✅ now PROTOCOLS is loaded
 
   setActiveView("protocols");
 
