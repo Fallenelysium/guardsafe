@@ -13,15 +13,9 @@
       "Controleer kritieke punten: nooduitgangen vrij, hoofddeuren dicht, toegangspost netjes/werkend.",
       "Leg vast in logboek: starttijd, status middelen, bijzonderheden (kort en feitelijk)."
     ],
-    "say": [
-      "“Welke open punten moet ik vandaag opvolgen?”",
-      "“Zijn er zones met extra aandacht of storingen?”"
-    ],
+    "say": ["“Welke open punten moet ik vandaag opvolgen?”", "“Zijn er zones met extra aandacht of storingen?”"],
     "escalate": "Bij ontbrekende middelen, twijfel over panelstatus of onduidelijke overdracht: direct melden bij leiding/meldkamer en laten bevestigen wat te doen.",
-    "dont": [
-      "Niet starten zonder werkende communicatie (porto/telefoon).",
-      "Geen aannames: als iets niet duidelijk is, vraag door en leg vast."
-    ]
+    "dont": ["Niet starten zonder werkende communicatie (porto/telefoon).", "Geen aannames: als iets niet duidelijk is, vraag door en leg vast."]
   },
   {
     "id": "einde-dienst",
@@ -37,36 +31,64 @@
       "Controleer post: netjes, veilig, deuren/panelen volgens procedure.",
       "Noteer eindtijd en aan wie je hebt overgedragen."
     ],
-    "say": [
-      "“Open punt: storing deur X — gemeld om 21:10 — status: nog open.”",
-      "“Extra aandacht: zone Y — eerder verdachte activiteit.”"
-    ],
+    "say": ["“Open punt: storing deur X — gemeld om 21:10 — status: nog open.”", "“Extra aandacht: zone Y — eerder verdachte activiteit.”"],
     "escalate": "Bij ernstig incident of onduidelijke status: leiding/meldkamer actief informeren, niet alleen ‘opschrijven’.",
-    "dont": [
-      "Niet vaag overdragen (“alles oké”) als er afwijkingen waren.",
-      "Geen belangrijke info pas ‘later’ rapporteren."
-    ]
+    "dont": ["Niet vaag overdragen (“alles oké”) als er afwijkingen waren.", "Geen belangrijke info pas ‘later’ rapporteren."]
   },
+  {
+    "id": "rapporteren-incident",
+    "title": "Incident rapporteren (kort en feitelijk)",
+    "category": "Dienst",
+    "keywords": ["rapport", "incident", "logboek", "feitelijk", "tijd", "locatie", "wie", "wat", "bewijs"],
+    "situation": "Je moet een incident registreren in logboek/rapport.",
+    "goal": "Feitelijk, compleet, zonder meningen.",
+    "steps": [
+      "Schrijf tijd + locatie + object/zone.",
+      "Beschrijf feiten: wat zag/hoorde je, wie (signalement/naam), wat is gedaan.",
+      "Noteer meldingen: wie gebeld, wanneer, wat afgesproken.",
+      "Noteer uitkomst: opgelost/overgedragen/open punt.",
+      "Check: duidelijk genoeg dat iemand anders het kan opvolgen."
+    ],
+    "say": ["“Ik noteer dit feitelijk met tijdlijn en meldingen.”"],
+    "escalate": "Bij ernstig incident: meldkamer/leiding actief informeren, niet alleen rapporteren.",
+    "dont": ["Geen aannames zonder bewijs.", "Geen emotionele taal in rapport."]
+  },
+  {
+    "id": "controle-cctv",
+    "title": "CCTV / camerabeelden controleren (basis)",
+    "category": "Dienst",
+    "keywords": ["cctv", "camera", "beelden", "monitor", "observatie", "incident", "tijdlijn"],
+    "situation": "Je moet camera’s controleren bij een melding of routine.",
+    "goal": "Snel overzicht en correcte info doorgeven.",
+    "steps": [
+      "Kies juiste camera/zone en noteer tijdstip van observatie.",
+      "Zoek op beweging/aanleiding (deur, gang, ingang).",
+      "Meld relevante observatie: wat/waar/richting/aantal personen.",
+      "Leg vast: camera/zone, tijd, bevinding.",
+      "Volg privacy-policy: deel beelden alleen volgens regels."
+    ],
+    "say": ["“Op camera ingang zie ik één persoon richting magazijn lopen.”"],
+    "escalate": "Bij acuut incident: direct melden en opvolgen volgens incident/noodprotocol.",
+    "dont": ["Niet beelden delen buiten procedure.", "Niet afgeleid raken: focus op risico."]
+  },
+
   {
     "id": "ronde-lopen",
     "title": "Ronde lopen / controlepunten",
     "category": "Rondes",
     "keywords": ["ronde", "controle", "scanpunt", "deur", "ramen", "sloten", "licht", "geluid", "afwijking", "nooduitgang", "sabotage"],
     "situation": "Je loopt een ronde door het object (met of zonder scanpunten).",
-    "goal": "Afwijkingen vroeg zien, risico’s beperken en bewijs/registratie klopt.",
+    "goal": "Afwijkingen vroeg zien, risico’s beperken en registratie klopt.",
     "steps": [
       "Volg route/scanpunten zoals afgesproken (niet improviseren tenzij nodig).",
       "Let op afwijkingen: open deuren/ramen, schade, vreemde geur/rook, verdachte geluiden.",
       "Check nooduitgangen: vrij, niet geblokkeerd, geen sabotage/sporen.",
-      "Noteer direct: tijd, locatie, wat je zag/hoorde/rook + foto/nummer indien policy.",
-      "Acuut risico? Stop, afstand, meld en wacht op backup volgens instructie."
+      "Noteer direct: tijd, locatie, wat je zag/hoorde/rook.",
+      "Twijfel of risico? Stop, afstand, meld en wacht op backup volgens instructie."
     ],
     "say": ["“Ik loop ronde en meld afwijkingen direct.”"],
     "escalate": "Bij sporen van inbraak/rook/agressie/verdachte personen: direct melden en incident/noodprotocol volgen.",
-    "dont": [
-      "Niet alleen een verdachte ruimte in als dat niet mag.",
-      "Niet ‘even snel’ iets verplaatsen/resetten zonder melding."
-    ]
+    "dont": ["Niet alleen een verdachte ruimte in als dat niet mag.", "Niet ‘even snel’ resetten zonder melding."]
   },
   {
     "id": "openen-sluiten-object",
@@ -76,19 +98,17 @@
     "situation": "Je opent of sluit het pand/terrein volgens procedure.",
     "goal": "Geen zones overslaan en systemen correct (de)activeren.",
     "steps": [
-      "Volg de locatie-checklist in vaste volgorde (altijd hetzelfde patroon).",
+      "Volg de checklist in vaste volgorde (altijd hetzelfde patroon).",
       "Controleer deuren/ramen/poorten: dicht, op slot, geen blokkades.",
       "Loop kritieke ruimtes volgens afspraak (server/magazijn/techniek).",
-      "Schakel alarm/panelen in of uit volgens procedure; controleer ‘OK’ status.",
-      "Leg vast in logboek: tijd, actie (open/sluit), bijzonderheden."
+      "Schakel alarm/panelen in of uit volgens procedure; check ‘OK’ status.",
+      "Leg vast: tijd, actie (open/sluit), bijzonderheden."
     ],
     "say": ["“Ik volg de vaste open/sluit procedure en meld afwijkingen direct.”"],
-    "escalate": "Bij storing, twijfel over alarmstatus of iemand nog binnen: direct leiding/meldkamer, niet gokken.",
-    "dont": [
-      "Niet afsluiten zonder controle-ronde (als dat in procedure zit).",
-      "Niet alarm activeren als je niet zeker bent dat het pand leeg is (volg regels)."
-    ]
+    "escalate": "Bij storing, twijfel of iemand nog binnen: direct leiding/meldkamer, niet gokken.",
+    "dont": ["Niet alarm activeren als je niet zeker weet dat het leeg is.", "Niet afsluiten als procedure ronde vereist en je die niet deed."]
   },
+
   {
     "id": "toegangscontrole",
     "title": "Toegangscontrole (bezoekers/leveranciers)",
@@ -101,29 +121,11 @@
       "Controleer: legitimatie + afspraak/aanmelding volgens policy.",
       "Registreer: tijd in, bestemming, begeleider (indien nodig).",
       "Geef badge/pas + instructie waar wel/niet komen.",
-      "Twijfel? Weiger toegang en escaleer."
+      "Twijfel? Laat wachten buiten en verifieer via contactpersoon/leiding."
     ],
-    "say": ["“Mag ik je legitimatie en je contactpersoon?”", "“Wacht even, ik verifieer dit.”"],
-    "escalate": "Bij weigering te legitimeren/geen afspraak/afwijkend gedrag: contactpersoon/leiding/meldkamer.",
+    "say": ["“Mag ik uw legitimatie en uw contactpersoon?”", "“Wacht even, ik verifieer dit.”"],
+    "escalate": "Bij weigering te legitimeren/geen afspraak/afwijkend gedrag: contactpersoon + leiding/meldkamer.",
     "dont": ["Niet ‘even doorlaten’ zonder check.", "Geen badge/pas zonder registratie."]
-  },
-  {
-    "id": "weigeren-toegang",
-    "title": "Toegang weigeren / ongewenste persoon",
-    "category": "Toegang",
-    "keywords": ["weigeren", "geen toegang", "ongewenst", "niet welkom", "wegsturen", "verwijderen", "afwijzen", "grens", "regels"],
-    "situation": "Iemand mag niet naar binnen of moet vertrekken.",
-    "goal": "Kalm, duidelijk, veilig. Geen escalatie en geen discussie.",
-    "steps": [
-      "Blijf rustig en houd afstand; zorg voor je eigen uitweg.",
-      "Zeg de regel kort: toegang niet toegestaan (herhaal indien nodig).",
-      "Bied alternatief: wachten buiten / contactpersoon bellen.",
-      "Loopt spanning op? Vraag backup via porto/leiding.",
-      "Wordt het dreigend/gewelddadig? Onttrek en schaal op volgens instructie (112 indien nodig)."
-    ],
-    "say": ["“Ik kan u niet binnenlaten. Ik bel uw contactpersoon.”", "“Ik vraag u nu te vertrekken.”"],
-    "escalate": "Bij agressie/dreiging/weigeren te vertrekken: incidentprotocol + leiding/meldkamer.",
-    "dont": ["Niet discussiëren of provoceren.", "Niet alleen blijven als het onveilig voelt."]
   },
   {
     "id": "registratie-bezoekers",
@@ -135,14 +137,69 @@
     "steps": [
       "Noteer: naam, bedrijf, contactpersoon, bestemming, tijd in.",
       "Controleer legitimatie als dat vereist is.",
-      "Geef badge/pas en leg regels uit (dragen zichtbaar indien policy).",
+      "Geef badge/pas en leg regels uit.",
       "Registreer tijd uit bij vertrek en neem badge/pas terug.",
       "Bij weigering registratie: geen toegang en escaleren."
     ],
     "say": ["“Ik registreer u even. Mag ik uw ID zien?”"],
     "escalate": "Bij discussie/weigering: leiding/meldkamer.",
-    "dont": ["Niet slordig registreren.", "Geen onnodige persoonsgegevens noteren (volg policy werkgever)."]
+    "dont": ["Niet slordig registreren.", "Geen onnodige persoonsgegevens noteren."]
   },
+  {
+    "id": "weigeren-toegang",
+    "title": "Toegang weigeren / ongewenste persoon",
+    "category": "Toegang",
+    "keywords": ["weigeren", "geen toegang", "ongewenst", "niet welkom", "wegsturen", "afwijzen", "grens", "regels"],
+    "situation": "Iemand mag niet naar binnen of moet vertrekken.",
+    "goal": "Kalm, duidelijk, veilig. Geen escalatie en geen discussie.",
+    "steps": [
+      "Blijf rustig en houd afstand; zorg voor je eigen uitweg.",
+      "Zeg de regel kort: toegang niet toegestaan (herhaal indien nodig).",
+      "Bied alternatief: wachten buiten / contactpersoon bellen.",
+      "Loopt spanning op? Vraag backup via porto/leiding.",
+      "Wordt het dreigend/gewelddadig? Onttrek en schaal op (112 indien nodig)."
+    ],
+    "say": ["“Ik kan u niet binnenlaten. Ik bel uw contactpersoon.”", "“Ik vraag u nu te vertrekken.”"],
+    "escalate": "Bij agressie/dreiging/weigeren te vertrekken: incidentprotocol + leiding/meldkamer. Bij geweld/wapen: 112.",
+    "dont": ["Niet discussiëren of provoceren.", "Niet alleen blijven als het onveilig voelt."]
+  },
+  {
+    "id": "toegang-buiten-kantooruren",
+    "title": "Toegang buiten kantooruren (extra check)",
+    "category": "Toegang",
+    "keywords": ["buiten kantooruren", "avond", "nacht", "toegang", "sleutel", "pas", "autorisatie", "oproep", "call-out"],
+    "situation": "Iemand wil ’s avonds/nachts naar binnen (medewerker/monteur/leverancier).",
+    "goal": "Alleen toegang met duidelijke autorisatie en registratie.",
+    "steps": [
+      "Vraag naam + doel + contactpersoon + reden (kort en feitelijk).",
+      "Check autorisatie volgens lijst/procedure (wie mag dit goedkeuren?).",
+      "Verifieer via telefoon/leiding/meldkamer (niet op ‘ik werk hier’).",
+      "Registreer: tijd in, naam, bestemming, wie autoriseerde.",
+      "Twijfel? Niet toelaten en melden (twijfel = melden is correct)."
+    ],
+    "say": ["“Ik laat u pas binnen na verificatie. Even geduld.”"],
+    "escalate": "Bij druk zetten/boos worden: weiger en schakel leiding/meldkamer in.",
+    "dont": ["Niet meelopen toestaan zonder check (tailgating).", "Niet ‘vriendelijk’ zijn ten koste van veiligheid."]
+  },
+  {
+    "id": "tailgating",
+    "title": "Tailgating (meelopen achter iemand)",
+    "category": "Toegang",
+    "keywords": ["tailgating", "meelopen", "deur", "pas", "badge", "toegang", "controleren"],
+    "situation": "Iemand probeert mee naar binnen te glippen achter een andere persoon.",
+    "goal": "Toegang veilig houden zonder escalatie.",
+    "steps": [
+      "Stop en spreek rustig aan (afstand houden).",
+      "Vraag om eigen pas/badge/ID volgens policy.",
+      "Verifieer contactpersoon of autorisatie als het onduidelijk is.",
+      "Registreer incident als het vaker gebeurt (tijd/locatie/omschrijving).",
+      "Twijfel? Weiger toegang en meld."
+    ],
+    "say": ["“Mag ik ook uw pas/badge zien? Iedereen moet zich aanmelden.”"],
+    "escalate": "Bij weigering of agressie: incidentprotocol + leiding/meldkamer.",
+    "dont": ["Niet negeren uit ‘sociale druk’.", "Niet discussiëren—regels kort herhalen."]
+  },
+
   {
     "id": "pakket-post-afhandeling",
     "title": "Pakket/post afhandeling (basis)",
@@ -158,27 +215,28 @@
       "Bij afwijking/verdacht: afstand nemen en escaleren."
     ],
     "say": ["“Voor wie is dit pakket en wat is de afdeling/referentie?”"],
-    "escalate": "Bij verdachte zending (lekkage, vreemde geur, geen afzender): afstand + leiding/meldkamer.",
+    "escalate": "Bij verdachte zending: afstand + leiding/meldkamer.",
     "dont": ["Niet openmaken als dat niet mag.", "Niet in publieke ruimte laten staan."]
   },
   {
-    "id": "verdachte-situatie",
-    "title": "Verdachte situatie (deur open / sporen / geluid)",
-    "category": "Incident",
-    "keywords": ["verdacht", "deur open", "raam open", "sporen", "geluid", "inbraak", "onbekend", "schaduw", "voetstap"],
-    "situation": "Je merkt iets dat niet klopt (deur open, sporen, vreemde geluiden).",
-    "goal": "Veilig beoordelen, communiceren en vastleggen.",
+    "id": "verdacht-pakket",
+    "title": "Verdacht pakket / verdachte zending",
+    "category": "Nood",
+    "keywords": ["verdacht pakket", "bom", "zending", "geur", "lekkage", "draad", "afzender", "dreiging"],
+    "situation": "Je ziet een pakket/zending die niet pluis voelt.",
+    "goal": "Afstand, veiligheid, juiste opschaling.",
     "steps": [
-      "Stop en beoordeel: wat zie/hoor/ruik je? Is er direct gevaar?",
-      "Neem afstand en kies positie met uitweg/dekking.",
-      "Meld: locatie, wat je ziet, of je wacht/observeert (porto/meldkamer).",
-      "Volg instructie: wacht op backup of controleer alleen als dat expliciet mag.",
-      "Leg vast: tijd, locatie, bevinding, vervolgactie."
+      "Raak het niet aan en verplaats het niet.",
+      "Houd afstand en zet de omgeving af (rustig, zonder paniek).",
+      "Meld direct aan leiding/meldkamer en volg instructie.",
+      "Schakel 112/politie in volgens instructie (bij duidelijke dreiging: direct 112).",
+      "Leg vast: tijd, locatie, wie aanwezig, maatregelen."
     ],
-    "say": ["“Ik heb een open deur bij zone X. Ik neem afstand en wacht op backup.”"],
-    "escalate": "Bij duidelijke inbraaksporen/indringer: opschalen volgens procedure en eventueel 112.",
-    "dont": ["Niet alleen naar binnen zonder toestemming/procedure.", "Niet ‘held spelen’ bij onzekerheid."]
+    "say": ["“Blijf rustig en blijf hier weg. Ik heb dit gemeld.”"],
+    "escalate": "Bij duidelijke dreiging: 112 direct + meldkamer/leiding.",
+    "dont": ["Niet openen/schudden/meenemen.", "Niet foto’s rondsturen."]
   },
+
   {
     "id": "alarmmelding",
     "title": "Alarmmelding (inbraak/technisch/brandpaneel)",
@@ -187,15 +245,33 @@
     "situation": "Er gaat een alarm af of het paneel geeft een melding.",
     "goal": "Juist lezen, veilig handelen, correct melden en registreren.",
     "steps": [
-      "Lees type melding + zone/locatie op paneel (volg werkinstructie).",
+      "Lees type melding + zone/locatie op paneel (volg instructie).",
       "Meld direct: type, zone, jouw vervolgstap (leiding/meldkamer).",
       "Ga alleen volgens procedure richting locatie (veiligheid eerst).",
-      "Controleer op rook/sporen/indringer zonder jezelf te riskeren.",
-      "Noteer: tijd, zone, bevinding, acties (logboek/rapport)."
+      "Controleer op rook/sporen/indringer zonder risico.",
+      "Noteer: tijd, zone, bevinding, acties."
     ],
     "say": ["“Melding zone X. Ik volg procedure en meld terug.”"],
-    "escalate": "Rook/brand/indringer/sporen: direct opschalen naar noodprotocol en/of 112 volgens regels.",
-    "dont": ["Niet resetten zonder check/goedkeuring.", "Niet alleen achter een mogelijke indringer aan."]
+    "escalate": "Rook/brand/indringer/sporen: direct opschalen en zo nodig 112.",
+    "dont": ["Niet resetten zonder check/goedkeuring.", "Niet solo risico nemen."]
+  },
+  {
+    "id": "loze-alarmmelding",
+    "title": "Loze melding / vals alarm (basis)",
+    "category": "Nood",
+    "keywords": ["loze melding", "vals alarm", "false alarm", "alarm", "paneel", "zone", "reset"],
+    "situation": "Het lijkt een alarm, maar er zijn nog geen duidelijke aanwijzingen.",
+    "goal": "Niet gokken: veilig controleren volgens procedure, correct registreren.",
+    "steps": [
+      "Behandel het eerst als echt: lees type/zone en meld direct.",
+      "Controleer alleen volgens procedure (niet solo risico nemen).",
+      "Zoek naar signalen: rook, schade, open deur/raam, personen, geluid.",
+      "Pas na bevestiging: reset/afmelden volgens instructie.",
+      "Leg vast: tijd, zone, controle, uitkomst, wie akkoord gaf."
+    ],
+    "say": ["“Ik controleer volgens procedure. Nog geen bevestiging, ik meld terug.”"],
+    "escalate": "Bij twijfel: opschalen en vraag bevestiging/backup.",
+    "dont": ["Niet wegwuiven.", "Niet resetten zonder check/akkoord."]
   },
   {
     "id": "brand-rook",
@@ -206,14 +282,32 @@
     "goal": "Mensen veilig, snelle alarmering, rook/brand beperken waar veilig.",
     "steps": [
       "Beoordeel veiligheid: blijf uit rook, neem afstand, houd uitweg vrij.",
-      "Alarmeer: 112 (of laat bellen) + leiding/meldkamer volgens meldstructuur.",
+      "Alarmeer: 112 (of laat bellen) + leiding/meldkamer.",
       "Start ontruiming volgens instructie (rustig, duidelijke route).",
       "Sluit deuren waar veilig mogelijk (rook beperken).",
       "Wacht hulpdiensten op en geef info: locatie, toegang, gevaren."
     ],
     "say": ["“We gaan nu naar buiten via deze nooduitgang.”", "“Blijf laag bij rook en volg de route.”"],
-    "escalate": "Altijd opschalen: 112 + meldkamer/leiding + ontruimingsprocedure.",
+    "escalate": "Altijd opschalen: 112 + meldkamer/leiding.",
     "dont": ["Niet terug naar binnen.", "Niet blussen als je niet getraind bent of het onveilig is."]
+  },
+  {
+    "id": "ontruiming",
+    "title": "Ontruiming (basis rol beveiliger)",
+    "category": "Nood",
+    "keywords": ["ontruiming", "evacuatie", "verzamelplaats", "brand", "alarm", "nooduitgang", "bhv"],
+    "situation": "Er moet ontruimd worden (brandmelding, rook, instructie BHV/meldkamer).",
+    "goal": "Mensen veilig naar buiten en overzicht behouden.",
+    "steps": [
+      "Volg instructie BHV/leiding/meldkamer (jij ondersteunt).",
+      "Stuur mensen rustig naar nooduitgangen.",
+      "Controleer waar veilig: toiletten/hoekjes (alleen als procedure dit vraagt).",
+      "Sluit deuren achter je waar mogelijk.",
+      "Verwijs naar verzamelplaats en meld status."
+    ],
+    "say": ["“Volg mij rustig, we gaan via deze uitgang.”"],
+    "escalate": "Bij rook/gevaar of missende personen: direct melden en zo nodig 112.",
+    "dont": ["Niet tegen instructies ingaan.", "Niet terug naar binnen zonder duidelijke opdracht."]
   },
   {
     "id": "medische-nood",
@@ -223,68 +317,418 @@
     "situation": "Iemand raakt gewond of wordt onwel.",
     "goal": "Veiligheid + snelle hulp + juiste alarmering.",
     "steps": [
-      "Check of de plek veilig is (geen extra risico).",
+      "Check of de plek veilig is.",
       "Beoordeel bewustzijn/ademhaling; bij twijfel direct 112.",
-      "Geef EHBO binnen jouw training (druk op bloeding, stabiele zijligging).",
+      "Geef EHBO binnen jouw training.",
       "Laat iemand BHV/AED halen als aanwezig.",
       "Noteer tijd, klachten, acties en wie er gebeld is."
     ],
     "say": ["“Kunt u me horen? Hulp is onderweg.”", "“Jij belt 112, jij haalt de AED.”"],
-    "escalate": "Bewusteloos, ademproblemen, hevige bloeding, pijn op borst: 112 direct + meldkamer/leiding.",
-    "dont": ["Niet onnodig verplaatsen bij mogelijk ernstig letsel.", "Niet alleen laten liggen zonder toezicht."]
+    "escalate": "Bewusteloos, ademproblemen, hevige bloeding: 112 direct + meldkamer/leiding.",
+    "dont": ["Niet onnodig verplaatsen.", "Niet alleen laten liggen zonder toezicht."]
+  },
+  {
+    "id": "bommelding-telefoon",
+    "title": "Bommelding via telefoon (basis)",
+    "category": "Nood",
+    "keywords": ["bommelding", "telefoon", "dreiging", "anoniem", "ontruiming", "politie", "112"],
+    "situation": "Je krijgt een telefonische dreiging/bommelding binnen.",
+    "goal": "Informatie verzamelen, kalm blijven, direct opschalen.",
+    "steps": [
+      "Blijf rustig en laat de beller praten (zo lang mogelijk aan de lijn).",
+      "Noteer exact: woorden, tijd, achtergrondgeluiden, accent, naam/organisatie (als genoemd).",
+      "Meld direct aan leiding/meldkamer (parallel laten bellen als mogelijk).",
+      "Volg instructies voor ontruiming/afzetting.",
+      "Leg alles vast in logboek/rapport."
+    ],
+    "say": ["“Kunt u herhalen wat u precies bedoelt en waar het is?”"],
+    "escalate": "Altijd opschalen naar leiding/meldkamer en politie/112 volgens procedure.",
+    "dont": ["Niet ophangen als het kan.", "Niet zelf gaan ‘zoeken’."]
+  },
+
+  {
+    "id": "verdachte-situatie",
+    "title": "Verdachte situatie (deur open / sporen / geluid)",
+    "category": "Incident",
+    "keywords": ["verdacht", "deur open", "raam open", "sporen", "geluid", "inbraak", "onbekend"],
+    "situation": "Je merkt iets dat niet klopt (deur open, sporen, vreemde geluiden).",
+    "goal": "Veilig beoordelen, communiceren en vastleggen.",
+    "steps": [
+      "Stop en beoordeel: wat zie/hoor/ruik je? Direct gevaar?",
+      "Neem afstand en kies positie met uitweg/dekking.",
+      "Meld: locatie, wat je ziet, of je wacht/observeert.",
+      "Wacht op backup als dat de procedure is.",
+      "Leg vast: tijd, locatie, bevinding, vervolgactie."
+    ],
+    "say": ["“Ik heb een open deur bij zone X. Ik neem afstand en wacht op backup.”"],
+    "escalate": "Bij duidelijke inbraaksporen/indringer: opschalen en eventueel 112.",
+    "dont": ["Niet alleen naar binnen zonder toestemming.", "Niet ‘held spelen’."]
+  },
+  {
+    "id": "indringer-terrein",
+    "title": "Onbevoegde persoon op terrein (indringer)",
+    "category": "Incident",
+    "keywords": ["indringer", "terrein", "inbraak", "onbevoegd", "hek", "poort", "achterdeur"],
+    "situation": "Je ziet een persoon op plek waar hij/zij niet hoort.",
+    "goal": "Veilig waarnemen, melden, risico beperken.",
+    "steps": [
+      "Observeer op afstand (geen onnodig risico).",
+      "Meld direct: locatie, aantal personen, richting, signalement.",
+      "Ga niet alleen achter iemand aan; wacht backup.",
+      "Beveilig toegang (deuren/poorten) waar veilig.",
+      "Leg vast: tijd, signalement, acties."
+    ],
+    "say": ["“U bevindt zich op privéterrein. Ik vraag u te vertrekken.”"],
+    "escalate": "Bij dreiging/weigering: opschalen en zo nodig 112.",
+    "dont": ["Niet achtervolgen als je alleen bent.", "Niet donkere ruimtes solo in."]
   },
   {
     "id": "agressie",
     "title": "Agressie (verbaal → fysiek)",
     "category": "Incident",
-    "keywords": ["agressie", "schelden", "dreigen", "woede", "vechten", "geweld", "wapen", "conflict", "de-escalatie"],
+    "keywords": ["agressie", "schelden", "dreigen", "woede", "vechten", "geweld", "wapen", "de-escalatie"],
     "situation": "Iemand wordt agressief of dreigt met geweld.",
     "goal": "De-escaleren en veiligheid waarborgen.",
     "steps": [
-      "Houd afstand en zorg voor uitweg (jij en anderen).",
+      "Houd afstand en zorg voor uitweg.",
       "Praat rustig: korte zinnen, grenzen stellen, geen discussie.",
-      "Vraag backup via porto/meldkamer bij oplopende spanning.",
+      "Vraag backup bij oplopende spanning.",
       "Beëindig contact als het onveilig wordt; ga naar veilige plek.",
-      "Bij direct geweld of wapen: 112 volgens instructie."
+      "Bij direct geweld of wapen: 112."
     ],
     "say": ["“Ik wil u helpen, maar niet als u schreeuwt.”", "“Ik neem afstand. We praten zo verder.”"],
-    "escalate": "Oplopend risico: collega/leiding. Wapen/geweld: 112.",
-    "dont": ["Niet provoceren of ‘winnen’ willen.", "Niet alleen blijven als de situatie onveilig is."]
+    "escalate": "Oplopend risico: leiding/meldkamer. Wapen/geweld: 112.",
+    "dont": ["Niet provoceren.", "Niet alleen blijven als het onveilig is."]
   },
+  {
+    "id": "conflict-personen",
+    "title": "Conflict tussen personen (ruzie / spanningen)",
+    "category": "Incident",
+    "keywords": ["ruzie", "conflict", "schreeuwen", "spanningen", "vechten"],
+    "situation": "Twee of meer personen raken in conflict.",
+    "goal": "Escalatie voorkomen en veiligheid herstellen.",
+    "steps": [
+      "Beoordeel risico en houd afstand.",
+      "Spreek rustig: stop, afstand, regels (geen discussie).",
+      "Vraag backup vroegtijdig.",
+      "Splits personen als dat veilig kan.",
+      "Leg vast: tijd, betrokkenen, acties."
+    ],
+    "say": ["“Stop. Houd afstand. We lossen dit rustig op.”"],
+    "escalate": "Bij geweld/dreiging: opschalen en zo nodig 112.",
+    "dont": ["Niet middenin gaan staan als het onveilig is.", "Niet partij kiezen."]
+  },
+  {
+    "id": "alcohol-drugs",
+    "title": "Alcohol/drugs (vermoeden gebruik of onder invloed)",
+    "category": "Incident",
+    "keywords": ["alcohol", "drugs", "onder invloed", "intoxicatie", "geur", "onstabiel", "agressie"],
+    "situation": "Iemand lijkt onder invloed of gebruikt middelen op locatie.",
+    "goal": "Veiligheid bewaren en juiste stappen volgen volgens policy.",
+    "steps": [
+      "Beoordeel risico: gedrag, agressie, wankel, bewustzijn.",
+      "Houd afstand, spreek rustig en stel grens volgens huisregels.",
+      "Meld en vraag instructie (leiding/meldkamer).",
+      "Weiger toegang of begeleid naar buiten als beleid dit zegt en het veilig kan.",
+      "Bij medische nood/gevaar: 112."
+    ],
+    "say": ["“Ik kan u zo niet binnenlaten. Ik vraag u buiten te wachten.”"],
+    "escalate": "Bij agressie/medische nood: opschalen en zo nodig 112.",
+    "dont": ["Niet discussiëren over gebruik.", "Niet alleen blijven bij onveilig gedrag."]
+  },
+  {
+    "id": "rondhangen-overlast",
+    "title": "Ongewenst rondhangen (overlast) bij ingang",
+    "category": "Incident",
+    "keywords": ["rondhangen", "overlast", "ingang", "verdacht", "groep", "hangjongeren"],
+    "situation": "Personen hangen rond bij ingang of terrein zonder duidelijke reden.",
+    "goal": "Overlast beperken en risico’s vroeg ondervangen.",
+    "steps": [
+      "Observeer: aantal, gedrag, richting, mogelijke risico’s.",
+      "Benader alleen als veilig; houd afstand en blijf professioneel.",
+      "Vraag doel en geef duidelijke grens (privéterrein / huisregels).",
+      "Meld bij aanhoudende overlast of spanning.",
+      "Leg vast: tijd, signalement, acties."
+    ],
+    "say": ["“Wat is de reden dat u hier staat? Dit is privéterrein.”"],
+    "escalate": "Bij weigering/dreiging: incidentprotocol + backup, bij geweld: 112.",
+    "dont": ["Niet provoceren.", "Niet alleen ingrijpen bij grotere groep."]
+  },
+
   {
     "id": "sleutels-pas-kwijt",
     "title": "Sleutels/pas kwijt of vermist",
     "category": "Incident",
-    "keywords": ["sleutel", "sleutels", "pas", "badge", "kwijt", "vermist", "toegang", "veiligheid", "blokkeren"],
-    "situation": "Een sleutel, badge of toegangspas is kwijt of vermist.",
-    "goal": "Risico beperken en toegang beveiligen.",
+    "keywords": ["sleutel", "sleutels", "pas", "badge", "kwijt", "vermist", "toegang", "melding"],
+    "situation": "Sleutels, badge of toegangspas is kwijt of mogelijk gestolen.",
+    "goal": "Risico beperken en direct juiste mensen informeren.",
     "steps": [
-      "Meld direct bij leiding/meldkamer dat er iets vermist is.",
-      "Noteer: wat is kwijt, wanneer laatst gezien, door wie gebruikt.",
-      "Volg instructie: blokkeren pas/slotplan aanpassen (indien van toepassing).",
-      "Controleer risicoplekken: uitgiftepunt, lockers, toegangspost.",
-      "Maak logboekmelding + incidentnotitie."
+      "Stop met gebruik van toegangsmiddelen.",
+      "Meld direct: wat ontbreekt, laatste locatie/tijd, zone.",
+      "Volg instructie: blokkeren pas, slotplan, extra rondes.",
+      "Controleer vaste plekken alleen als veilig en afgesproken.",
+      "Leg vast: tijdlijn en acties."
     ],
-    "say": ["“Ik meld dat pas/sleutel X vermist is. Ik volg de blokkadeprocedure.”"],
-    "escalate": "Altijd opschalen naar leiding/meldkamer; mogelijk beveiligingsincident.",
-    "dont": ["Niet wachten ‘misschien komt het terug’.", "Niet stilhouden om gedoe te vermijden."]
+    "say": ["“Mijn toegangspas is vermist sinds ronde X. Ik meld dit direct.”"],
+    "escalate": "Altijd opschalen: leiding/meldkamer. Mogelijke diefstal: volgens policy.",
+    "dont": ["Niet verzwijgen.", "Niet zelf sloten wisselen zonder opdracht."]
   },
   {
-    "id": "incident-rapportage",
-    "title": "Incident rapportage (template)",
-    "category": "Rapportage",
-    "keywords": ["rapport", "rapportage", "incident", "logboek", "tijd", "getuigen", "beschrijving", "feitelijk"],
-    "situation": "Je moet een incident vastleggen voor overdracht of leiding.",
-    "goal": "Feiten helder, kort, volledig en zonder aannames.",
+    "id": "gevonden-voorwerp",
+    "title": "Gevonden voorwerp (telefoon/tas/sleutels)",
+    "category": "Dienst",
+    "keywords": ["gevonden", "voorwerp", "telefoon", "tas", "sleutels", "lost and found", "eigendom"],
+    "situation": "Je vindt een voorwerp waarvan je de eigenaar niet kent.",
+    "goal": "Veilig bewaren en correct registreren.",
     "steps": [
-      "Schrijf datum + tijd + exacte locatie (zone/ruimte).",
-      "Beschrijf feiten: wat zag/hoorde je (geen mening).",
-      "Noteer betrokkenen: namen/omschrijving + getuigen indien relevant.",
-      "Schrijf acties: wat heb jij/collega’s gedaan + tijden.",
-      "Status/opvolging: wat moet nog gebeuren en wie is geïnformeerd."
+      "Beoordeel: is het veilig/verdacht? (bij twijfel: escaleren).",
+      "Registreer: tijd, locatie, omschrijving.",
+      "Berg veilig op volgens procedure (gevonden voorwerpen).",
+      "Informeer leiding/receptie volgens afspraken.",
+      "Geef alleen af aan juiste eigenaar na verificatie."
     ],
-    "say": ["“Ik schrijf alleen feiten: wat, waar, wanneer, wie, acties.”"],
-    "escalate": "Bij geweld, diefstal, letsel of politie/ambulance: direct melden en rapporteren volgens regels.",
-    "dont": ["Geen aannames (“hij was vast dronken”).", "Geen vage taal als je het niet zeker weet."]
+    "say": ["“Kunt u omschrijven wat er in de tas zit/hoe hij eruit ziet?”"],
+    "escalate": "Bij verdachte kenmerken: volg ‘Verdacht pakket’ protocol.",
+    "dont": ["Niet zelf gebruiken/openen.", "Niet meegeven zonder verificatie."]
+  },
+
+  {
+    "id": "winkeldiefstal",
+    "title": "Diefstal vermoeden (winkel/voorraad) – basis",
+    "category": "Incident",
+    "keywords": ["diefstal", "winkeldiefstal", "stelen", "verdacht gedrag", "camera", "bewijs"],
+    "situation": "Je vermoedt dat iemand iets steelt of heeft gestolen.",
+    "goal": "Veilig handelen, bewijs/observatie, juiste opschaling.",
+    "steps": [
+      "Observeer eerst (liefst via camera/afstand) – geen risico nemen.",
+      "Meld aan leiding/meldkamer volgens procedure.",
+      "Benader alleen als beleid dit toestaat en het veilig is.",
+      "Vraag rustig om mee te lopen naar een veilige plek (geen discussie).",
+      "Leg vast: tijd, locatie, gedrag, betrokkenen."
+    ],
+    "say": ["“Komt u even mee? Ik wil dit rustig met u bespreken.”"],
+    "escalate": "Bij agressie/ren weg/gevaar: opschalen volgens policy en zo nodig politie/112.",
+    "dont": ["Niet fysiek ingrijpen als je daar niet bevoegd voor bent.", "Niet beschuldigen zonder basis."]
+  },
+
+  {
+    "id": "deur-storing",
+    "title": "Deur/slot storing (klem, sluit niet, openstaand)",
+    "category": "Techniek",
+    "keywords": ["deur", "slot", "storing", "klem", "sluit niet", "open", "toegang", "branddeur"],
+    "situation": "Een deur sluit niet goed of blijft open/staat op storing.",
+    "goal": "Toegang beveiligen en melding correct doorzetten.",
+    "steps": [
+      "Beoordeel risico: kritieke deur (nooduitgang, buitendeur, serverruimte)?",
+      "Beveilig tijdelijk: toezicht/afzetten/extra ronde volgens instructie.",
+      "Meld direct: locatie, deurtype, risico.",
+      "Maak melding bij techniek volgens procedure.",
+      "Leg vast: tijd, melding, tijdelijke maatregel."
+    ],
+    "say": ["“Deur X sluit niet. Ik houd toezicht en heb dit gemeld.”"],
+    "escalate": "Kritieke deur + onveilig: direct opschalen naar leiding/meldkamer.",
+    "dont": ["Niet nooddeur blokkeren.", "Niet aannemen dat het wel goed komt."]
+  },
+  {
+    "id": "nooduitgang-blokkade",
+    "title": "Nooduitgang geblokkeerd / branddeur vastgezet",
+    "category": "Techniek",
+    "keywords": ["nooduitgang", "branddeur", "blokkade", "vastgezet", "pallet", "veiligheid", "ontruiming"],
+    "situation": "Een nooduitgang of branddeur is geblokkeerd of vastgezet.",
+    "goal": "Brandveiligheid herstellen of direct melden/afzetten volgens beleid.",
+    "steps": [
+      "Beoordeel direct risico (ontruiming/brandveiligheid).",
+      "Meld direct aan leiding/meldkamer.",
+      "Laat blokkade verwijderen door verantwoordelijke volgens policy.",
+      "Zet tijdelijk af/waarschuw en noteer locatie.",
+      "Leg vast: wat, waar, tijd, wie geïnformeerd."
+    ],
+    "say": ["“Deze nooduitgang moet vrij zijn. Ik meld dit direct.”"],
+    "escalate": "Bij herhaling/weigering: opschalen naar leiding/gebouwbeheer.",
+    "dont": ["Niet negeren.", "Niet zelf branddeur manipuleren als beleid dit verbiedt."]
+  },
+  {
+    "id": "brandmelder-piept",
+    "title": "Rookmelder/brandmelder piept (batterij/storing)",
+    "category": "Techniek",
+    "keywords": ["rookmelder", "brandmelder", "piept", "batterij", "storing", "brandalarm"],
+    "situation": "Een melder piept of geeft storingssignaal, zonder rook/brand.",
+    "goal": "Uitsluiten van gevaar en melding correct doorzetten.",
+    "steps": [
+      "Beoordeel eerst: rook/brandlucht aanwezig? Zo ja → ‘Brand/rook’.",
+      "Meld storing aan leiding/meldkamer/techniek volgens procedure.",
+      "Noteer locatie (ruimte, verdieping, meldernr indien bekend).",
+      "Zorg dat de omgeving veilig blijft (geen paniek).",
+      "Leg vast: tijd, melding, doorgezet naar techniek."
+    ],
+    "say": ["“Ik ruik geen rook. Dit lijkt storing, ik heb techniek gemeld.”"],
+    "escalate": "Bij twijfel of rooksignalen: direct opschalen naar noodprotocol.",
+    "dont": ["Niet negeren.", "Niet melder demonteren zonder bevoegdheid."]
+  },
+  {
+    "id": "porto-storing",
+    "title": "Porto/communicatie storing",
+    "category": "Techniek",
+    "keywords": ["porto", "storing", "geen bereik", "communicatie", "batterij", "kanaal", "volume"],
+    "situation": "Portofoon werkt niet of je hoort niemand/wordt niet gehoord.",
+    "goal": "Snel weer veilig communiceren of alternatief gebruiken.",
+    "steps": [
+      "Check basics: kanaal, volume, PTT, batterij, headset.",
+      "Test met collega/meldkamer (korte testmelding).",
+      "Gebruik alternatief: telefoon/vaste lijn volgens procedure.",
+      "Meld storing en vraag vervangend middel.",
+      "Leg vast: tijd, storing, tijdelijke oplossing."
+    ],
+    "say": ["“Ik heb portostoring. Ik schakel over op telefoon en meld dit.”"],
+    "escalate": "Zonder communicatie: geen risicohandelingen → direct instructie vragen.",
+    "dont": ["Niet doorgaan met taken die communicatie vereisen.", "Niet wachten ‘tot het vanzelf werkt’."]
+  },
+  {
+    "id": "stroomuitval",
+    "title": "Stroomuitval / noodverlichting",
+    "category": "Techniek",
+    "keywords": ["stroomuitval", "stroom", "blackout", "noodverlichting", "aggregaat", "lift"],
+    "situation": "De stroom valt uit (gedeeltelijk of volledig).",
+    "goal": "Veiligheid waarborgen, paniek voorkomen, risico’s melden.",
+    "steps": [
+      "Beoordeel veiligheid: verlichting/noodverlichting, gevaarlijke zones.",
+      "Meld direct: omvang, locaties, wat werkt nog.",
+      "Controleer kritieke punten waar veilig: nooduitgangen, liften, toegang.",
+      "Stuur mensen weg van risicozones, zet af indien nodig.",
+      "Leg vast: tijdlijn, meldingen, acties."
+    ],
+    "say": ["“Blijf rustig. We gebruiken de trap en wachten op instructies.”"],
+    "escalate": "Bij opgesloten personen/paniek/medisch: opschalen (BHV/112) volgens procedure.",
+    "dont": ["Niet liften gebruiken.", "Niet solo in donkere ruimtes als het onveilig is."]
+  },
+  {
+    "id": "lift-storing-opgesloten",
+    "title": "Lift storing / persoon opgesloten",
+    "category": "Techniek",
+    "keywords": ["lift", "storing", "opgesloten", "vast", "paniek", "intercom", "112"],
+    "situation": "Een lift staat stil en iemand zit vast.",
+    "goal": "Rust bewaren, hulp inschakelen, geen risico nemen.",
+    "steps": [
+      "Praat via intercom/deur: stel gerust, check medische klachten.",
+      "Meld direct: leiding/meldkamer + liftservice (locatie, liftnummer).",
+      "Zorg dat niemand de lift open wrikt.",
+      "Blijf beschikbaar voor contact tot hulp arriveert.",
+      "Leg vast: tijd, betrokkenen, meldingen, uitkomst."
+    ],
+    "say": ["“Blijf rustig, hulp is onderweg. Kunt u normaal ademen?”"],
+    "escalate": "Bij medische klachten/rook/brand: 112 + meldkamer.",
+    "dont": ["Niet zelf de lift openen.", "Niet beloven dat het ‘zo klaar’ is als je het niet weet."]
+  },
+  {
+    "id": "waterlekkage",
+    "title": "Waterlekkage / waterschade",
+    "category": "Techniek",
+    "keywords": ["lekkage", "water", "waterschade", "plafond", "leiding", "elektra", "glad"],
+    "situation": "Er is lekkage of water op de vloer/plafond.",
+    "goal": "Letsel/elektrarisico voorkomen en snel melden.",
+    "steps": [
+      "Beoordeel risico: gladheid, elektriciteit, apparatuur.",
+      "Zet af/waarschuw (valgevaar) en houd mensen weg.",
+      "Meld aan leiding/meldkamer + techniek/gebouwbeheer.",
+      "Alleen als veilig en toegestaan: beperkte opvang (emmer) zonder elektra-risico.",
+      "Leg vast: locatie, tijd, omvang, acties."
+    ],
+    "say": ["“Pas op: glad. Ik zet het af en heb techniek gemeld.”"],
+    "escalate": "Bij groot elektra-risico of gevaar: opschalen en zo nodig 112.",
+    "dont": ["Niet door water lopen bij elektra-risico.", "Niet techniekruimtes openen zonder opdracht."]
+  },
+  {
+    "id": "gaslucht",
+    "title": "Gaslucht / sterke chemische geur",
+    "category": "Nood",
+    "keywords": ["gaslucht", "gas", "chemische geur", "lucht", "lek", "112", "evacuatie"],
+    "situation": "Je ruikt gas of een sterke, onbekende chemische geur.",
+    "goal": "Mensen veilig, snelle melding, geen ontsteking/risico.",
+    "steps": [
+      "Neem afstand, waarschuw mensen rustig en houd uitweg vrij.",
+      "Meld direct aan leiding/meldkamer en volg instructies.",
+      "Gebruik geen schakelaars/ontstekingsbronnen in de directe omgeving.",
+      "Laat hulpdiensten/techniek bepalen wat te doen (evacuatie/afsluiten).",
+      "Leg vast: locatie, tijd, waar geur het sterkst is."
+    ],
+    "say": ["“We gaan rustig naar buiten. Ik heb een gaslucht gemeld.”"],
+    "escalate": "Bij sterke gaslucht of klachten: 112 direct + meldkamer.",
+    "dont": ["Niet ‘even zoeken’ met lamp/aan-uit schakelaars.", "Niet terug naar binnen zonder akkoord."]
+  },
+
+  {
+    "id": "oefening-alarm",
+    "title": "Oefening/test alarm (brand/ontruiming)",
+    "category": "Dienst",
+    "keywords": ["oefening", "test", "alarm", "ontruiming", "bhv", "melding"],
+    "situation": "Er is een test of oefening van alarm/ontruiming.",
+    "goal": "Rust, juiste communicatie, juiste registratie.",
+    "steps": [
+      "Verifieer: is het écht een oefening? (leiding/meldkamer).",
+      "Communiceer helder naar aanwezigen volgens instructie.",
+      "Observeer knelpunten: nooduitgangen, gedrag, obstakels.",
+      "Noteer bevindingen en verbeterpunten.",
+      "Rapporteer aan leiding/BHV volgens afspraken."
+    ],
+    "say": ["“Dit is een oefening. Volg de instructies rustig.”"],
+    "escalate": "Als het toch echt blijkt: direct naar noodprotocol.",
+    "dont": ["Niet aannemen dat het oefening is zonder verificatie."]
+  },
+
+  {
+    "id": "voertuig-toegang",
+    "title": "Voertuig toegang / slagboom / poort",
+    "category": "Toegang",
+    "keywords": ["voertuig", "slagboom", "poort", "kenteken", "levering", "toegang", "chauffeur"],
+    "situation": "Een voertuig wil het terrein op (levering, medewerker, bezoek).",
+    "goal": "Alleen juiste voertuigen binnen, veilig en geregistreerd.",
+    "steps": [
+      "Vraag doel, bedrijf, contactpersoon en check autorisatie.",
+      "Controleer kenteken/ID volgens policy (als van toepassing).",
+      "Geef route/regels (snelheid, parkeren, zones).",
+      "Registreer tijd in/uit en bestemming indien vereist.",
+      "Twijfel? Laat wachten buiten en verifieer."
+    ],
+    "say": ["“Wat is uw bestemming en wie is uw contactpersoon?”"],
+    "escalate": "Bij weigering/afwijkend gedrag: leiding/meldkamer.",
+    "dont": ["Niet doorlaten op druk/haast.", "Niet poort openen zonder check als dat verplicht is."]
+  },
+
+  {
+    "id": "paniek-angst",
+    "title": "Paniek/angst (bezoeker of medewerker)",
+    "category": "Incident",
+    "keywords": ["paniek", "angst", "hyperventilatie", "stress", "medisch", "rust"],
+    "situation": "Iemand raakt in paniek of hyperventileert (zonder direct letsel).",
+    "goal": "Rust creëren en beoordelen of medische hulp nodig is.",
+    "steps": [
+      "Breng persoon naar rustige plek (als veilig).",
+      "Praat rustig en langzaam, laat rustig ademhalen.",
+      "Vraag: pijn op borst, bewustzijn, bekende aandoening?",
+      "Meld aan leiding/meldkamer volgens procedure.",
+      "Bij twijfel of verslechtering: 112."
+    ],
+    "say": ["“Kijk naar mij. Rustig in… rustig uit… ik blijf bij u.”"],
+    "escalate": "Bij bewustzijnsverlies, pijn op borst, benauwd: 112.",
+    "dont": ["Niet bagatelliseren.", "Niet alleen laten als het onveilig voelt."]
+  },
+
+  {
+    "id": "vandalisme",
+    "title": "Vandalisme / schade ontdekken",
+    "category": "Incident",
+    "keywords": ["vandalisme", "schade", "vernieling", "graffiti", "kapot", "sporen"],
+    "situation": "Je ziet schade/vernieling aan object of terrein.",
+    "goal": "Veiligstellen, melden en vastleggen.",
+    "steps": [
+      "Beoordeel veiligheid (glas, scherpe delen, elektra).",
+      "Meld aan leiding/meldkamer.",
+      "Leg vast: tijd, locatie, soort schade (foto alleen als policy).",
+      "Controleer of toegang/veiligheid in gevaar is (deur/raam open).",
+      "Zet af indien nodig en wacht instructies."
+    ],
+    "say": ["“Ik heb schade gevonden bij ingang X. Ik meld en zet het af.”"],
+    "escalate": "Bij inbraaksporen of acuut gevaar: opschalen en zo nodig politie/112.",
+    "dont": ["Niet schoonmaken/verplaatsen voordat het vastgelegd is (als dat policy is)."]
   }
 ]
