@@ -216,6 +216,37 @@ a{
 }
 
 /* =========================
+   CALLOUTS (beginner confidence)
+   ========================= */
+.callout{
+  border-radius: 14px;
+  padding: 12px 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  margin: 10px 0 12px;
+}
+
+.callout-title{
+  margin: 0 0 6px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.callout-text{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.callout.info{
+  border-color: rgba(56,189,248,0.22);
+  background: rgba(56,189,248,0.10);
+}
+
+/* =========================
    FORMS
    ========================= */
 .label{
@@ -613,4 +644,29 @@ a{
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Chat form fix: input + knop netjes naast elkaar */
+.chat-form{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.chat-form .input{
+  flex:1;
+  min-width:0;
+}
+
+.chat-form .btn{
+  width:auto;           /* override .btn { width:100% } */
+  flex:0 0 auto;
+  white-space:nowrap;
+  padding: 12px 18px;
+}
+
+/* Op smalle schermen mag hij weer onder elkaar */
+@media (max-width: 520px){
+  .chat-form{ flex-direction:column; }
+  .chat-form .btn{ width:100%; }
 }
