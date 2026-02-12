@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Offline protocol-app voor beginnende beveiligers (objectbeveiliging): protocollen, nood, checklists en een snelle assistent." />
+
+  <title>ProtocolBuddy – Objectbeveiliging</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="shield.png" />
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#appMain">Ga naar inhoud</a>
+
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">🛡️</span>
+        <div class="brand-text">
+          <h1 class="brand-title">ProtocolBuddy</h1>
+          <p class="brand-subtitle">Objectbeveiliging • Offline</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="btnSettings" class="icon-button" type="button" aria-label="Instellingen openen">
+        ⚙️
+      </button>
+    </div>
+  </header>
+
+  <main id="appMain" class="app-main">
+    <!-- ========== PROTOCOLLEN ========== -->
+    <section id="view-protocols" class="view is-active" data-view="protocols" aria-labelledby="title-protocols">
+      <div class="view-header">
+        <h2 id="title-protocols">Protocollen</h2>
+        <p class="hint">Zoek een situatie en open direct het stappenplan.</p>
+      </div>
+
+      <div class="card">
+        <label class="label" for="protocolSearch">Zoeken</label>
+        <input
+          id="protocolSearch"
+          class="input"
+          type="search"
+          placeholder="Bijv. alarm, rook, agressie, toegang, verdachte persoon…"
+          autocomplete="off"
+        />
+        <div class="row">
+          <button id="btnClearSearch" class="btn secondary" type="button">Wissen</button>
+          <button id="btnOpenMostUsed" class="btn ghost" type="button">Meest gebruikt</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Categorieën</h3>
+        <div id="categoryChips" class="chips" aria-label="Protocol categorieën"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3 class="card-title">Resultaten</h3>
+          <span id="protocolCount" class="badge" aria-live="polite">0</span>
+        </div>
+
+        <ul id="protocolList" class="list" aria-label="Protocol lijst"></ul>
+      </div>
+    </section>
+
+    <!-- ========== NOOD ========== -->
+    <section id="view-emergency" class="view" data-view="emergency" aria-labelledby="title-emergency">
+      <div class="view-header">
+        <h2 id="title-emergency">Nood</h2>
+        <p class="hint">Snel naar de juiste actie. Bij levensgevaar: bel 112.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Directe knoppen</h3>
+        <div class="grid">
+          <button class="btn danger" type="button" data-open-protocol="brand-rook">🔥 Brand / rook</button>
+          <button class="btn danger" type="button" data-open-protocol="medische-nood">🩺 Medische nood</button>
+          <button class="btn danger" type="button" data-open-protocol="agressie">⚠️ Agressie</button>
+          <button class="btn danger" type="button" data-open-protocol="alarmmelding">🚨 Alarmmelding</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">112 meldstructuur</h3>
+        <ol class="steps">
+          <li><strong>Wie</strong> ben je + functie + locatie object</li>
+          <li><strong>Wat</strong> is er aan de hand (brand/medisch/geweld)</li>
+          <li><strong>Waar</strong> exact (adres, verdieping, toegang)</li>
+          <li><strong>Gevaren</strong> (wapen, rook, chemicaliën, groep)</li>
+          <li><strong>Wat doe je nu</strong> (ontruimen, EHBO, afzetten)</li>
+        </ol>
+        <p class="small muted">Let op: volg altijd bedrijfsinstructies en meldkamer/leiding.</p>
+      </div>
+    </section>
+
+    <!-- ========== CHECKLISTS ========== -->
+    <section id="view-checklists" class="view" data-view="checklists" aria-labelledby="title-checklists">
+      <div class="view-header">
+        <h2 id="title-checklists">Checklists</h2>
+        <p class="hint">Kort en duidelijk: start dienst, rondes, overdracht.</p>
+      </div>
+
+      <div class="card">
+        <div class="tabs" role="tablist" aria-label="Checklist tabs">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-checktab="start">Start dienst</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-checktab="ronde">Ronde</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-checktab="einde">Einde dienst</button>
+        </div>
+
+        <div id="checklistPanel" class="checklist" aria-live="polite"></div>
+
+        <div class="row">
+          <button id="btnChecklistReset" class="btn secondary" type="button">Reset</button>
+          <button id="btnChecklistSave" class="btn primary" type="button">Opslaan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CHAT ASSISTENT ========== -->
+    <section id="view-chat" class="view" data-view="chat" aria-labelledby="title-chat">
+      <div class="view-header">
+        <h2 id="title-chat">Assistent</h2>
+        <p class="hint">Beschrijf je situatie. Ik geef je het juiste protocol + stap 1–3.</p>
+      </div>
+
+      <div class="card">
+        <div id="chatThread" class="chat-thread" aria-label="Chat berichten" aria-live="polite">
+          <div class="chat-msg bot">
+            <div class="bubble">
+              Typ wat er gebeurt (bijv. “alarm gaat af” of “persoon weigert weg te gaan”). Ik blijf bij jouw protocollen.
+            </div>
+          </div>
+        </div>
+
+        <form id="chatForm" class="chat-form" autocomplete="off">
+          <label class="sr-only" for="chatInput">Chat invoer</label>
+          <input id="chatInput" class="input" type="text" placeholder="Bijv. ‘verdachte persoon bij zijdeur’…" />
+          <button class="btn primary" type="submit">Verstuur</button>
+        </form>
+
+        <div class="quick-replies" aria-label="Snelle opties">
+          <button class="chip" type="button" data-quick="alarm">Alarm</button>
+          <button class="chip" type="button" data-quick="rook">Rook</button>
+          <button class="chip" type="button" data-quick="agressie">Agressie</button>
+          <button class="chip" type="button" data-quick="toegang">Toegang</button>
+          <button class="chip" type="button" data-quick="verdacht">Verdacht</button>
+        </div>
+      </div>
+
+      <p class="small muted">
+        Disclaimer: algemene richtlijnen. Volg altijd instructies van jouw werkgever/opdracht en de wet. Bij direct gevaar: 112.
+      </p>
+    </section>
+
+    <!-- ========== FAVORIETEN ========== -->
+    <section id="view-favorites" class="view" data-view="favorites" aria-labelledby="title-favorites">
+      <div class="view-header">
+        <h2 id="title-favorites">Favorieten</h2>
+        <p class="hint">Snel terug naar jouw meest gebruikte protocollen.</p>
+      </div>
+
+      <div class="card">
+        <ul id="favoritesList" class="list" aria-label="Favoriete protocollen"></ul>
+        <p id="favoritesEmpty" class="muted">Nog geen favorieten. Open een protocol en tik op ⭐.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" aria-label="Hoofdnavigatie">
+    <button class="nav-btn is-active" type="button" data-nav="protocols" aria-current="page">
+      <span class="nav-ico" aria-hidden="true">📚</span>
+      <span class="nav-txt">Protocollen</span>
+    </button>
+    <button class="nav-btn" type="button" data-nav="emergency">
+      <span class="nav-ico" aria-hidden="true">🚨</span>
+      <span class="nav-txt">Nood</span>
+    </button>
+    <button class="nav-btn" type="button" data-nav="checklists">
+      <span class="nav-ico" aria-hidden="true">✅</span>
+      <span class="nav-txt">Checklists</span>
+    </button>
+    <button class="nav-btn" type="button" data-nav="chat">
+      <span class="nav-ico" aria-hidden="true">💬</span>
+      <span class="nav-txt">Chat</span>
+    </button>
+    <button class="nav-btn" type="button" data-nav="favorites">
+      <span class="nav-ico" aria-hidden="true">⭐</span>
+      <span class="nav-txt">Favorieten</span>
+    </button>
+  </nav>
+
+  <!-- Settings modal -->
+  <dialog id="settingsModal" class="modal" aria-label="Instellingen">
+    <div class="modal-body">
+      <div class="modal-head">
+        <h3>Instellingen</h3>
+        <button id="btnCloseSettings" class="icon-button" type="button" aria-label="Sluiten">✕</button>
+      </div>
+
+      <p class="muted small" style="margin:0 0 10px;">
+        Disclaimer: Dit is een hulpmiddel met algemene richtlijnen. Volg altijd de instructies van je werkgever/opdracht en de wet.
+      </p>
+
+      <div class="grid" style="margin-top:12px;">
+        <button id="btnResetFavorites" class="btn secondary" type="button">Reset favorieten</button>
+        <button id="btnResetUsage" class="btn secondary" type="button">Reset ‘meest gebruikt’</button>
+        <button id="btnResetAllData" class="btn danger" type="button">Reset alles</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Protocol modal -->
+  <dialog id="protocolModal" class="modal" aria-labelledby="protocolModalTitle">
+    <div class="modal-body">
+      <div class="modal-head">
+        <h3 id="protocolModalTitle">Protocol</h3>
+        <button id="btnCloseModal" class="icon-button" type="button" aria-label="Sluiten">✕</button>
+      </div>
+
+      <div id="protocolModalContent" class="modal-content"></div>
+
+      <div class="modal-actions">
+        <button id="btnToggleFavorite" class="btn secondary" type="button">⭐ Favoriet</button>
+        <button id="btnOpenInProtocols" class="btn primary" type="button">Open in Protocollen</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
